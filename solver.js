@@ -21,7 +21,6 @@
 **/ 
 
 const solveSudoku = board => {
-
     let numOfUnsolved = findTotalUnsolved(board);
 
     while(numOfUnsolved > 0) {
@@ -54,12 +53,9 @@ const findTotalUnsolved = (board) => {
 }
 
 const solveCell = (board, x, y) => {
-    let rowArray = getColOrRowArray(board, "row", y);
-    let colArray = getColOrRowArray(board, "col", x);
-    let blockArray = getBlockArray(board, x, y);
-
+    // Get the values that are not present in the row, column, or 3x3 block
     const survivors = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter((n) => {
-        return !rowArray.includes(n) && !colArray.includes(n) && !blockArray.includes(n);
+        return !getColOrRowArray(board, "row", y).includes(n) && !getColOrRowArray(board, "col", x).includes(n) && !getBlockArray(board, x, y).includes(n);
     });
 
     // Solve the cell when it has only one possible value
